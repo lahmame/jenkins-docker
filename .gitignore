@@ -1,0 +1,8 @@
+/.project
+/.settings/
+/.classpath
+/bin/
+*.tmp
+bats/
+/docker.iml
+

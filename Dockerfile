@@ -72,6 +72,7 @@ ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
 ENV JENKINS_ENABLE_FUTURE_JAVA=true
 
 ENV CASC_JENKINS_CONFIG $JENKINS_HOME/casc_configs
+RUN mkdir $CASC_JENKINS_CONFIG/
 COPY casc/* $CASC_JENKINS_CONFIG/
 
 USER ${user}
@@ -86,4 +87,10 @@ COPY plugins.sh /usr/local/bin/plugins.sh
 COPY install-plugins.sh /usr/local/bin/install-plugins.sh
 
 COPY plugins.txt ${REF}/plugins.txt
+USER root
+RUN chmod 777 /usr/local/bin/install-plugins.sh
+RUN chmod 777 /usr/local/bin/jenkins.sh
+
+USER ${user}
 RUN /usr/local/bin/install-plugins.sh < ${REF}/plugins.txt
+

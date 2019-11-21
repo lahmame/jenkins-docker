@@ -1,0 +1,203 @@
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - usernamePassword:
+          description: "the description"
+          id: "the_id"
+          password: "{AQAAABAAAABAULK9FNMCzL1xtHestbklr7/mmOJ85KUbTaaYgAuWIVob5W0U9ODIYhG+CRPywr2W+RZTkyvdviPagMCYjHJpsgSNBR6qxBqjRpf+1sx2Grs=}"
+          scope: GLOBAL
+          username: "admin"
+      - usernamePassword:
+          id: "94bf3024-8652-4dc0-b2d9-b6c892bba79f"
+          password: "{AQAAABAAAABAx+fRBZi4CgLvb9JBfePBRKhKqWQAEoyUCplsvlH3kmd9lSVz7iJkQz65kFTp/bHCEl6Eh1f4WihxxPRLWE/rM2zioR7hnalg251Xtps4lHE=}"
+          scope: GLOBAL
+          username: "admin"
+      - basicSSHUserPrivateKey:
+          id: "robotops"
+          privateKeySource:
+            directEntry:
+              privateKey: ${ROBOTOPS_PRIVATE_KEY} 
+          scope: GLOBAL
+          username: "robotops"
+      - basicSSHUserPrivateKey:
+          description: "root87"
+          id: "root87"
+          privateKeySource:
+            directEntry:
+              privateKey: ${SSH_87_PRIVATE_KEY} 
+          scope: GLOBAL
+          username: "root@192.168.1.87"
+jenkins:
+  agentProtocols:
+  - "JNLP4-connect"
+  - "Ping"
+  authorizationStrategy:
+    projectMatrix:
+      permissions:
+      - "Overall/Administer:admin"
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: false
+  disableRememberMe: false
+  markupFormatter: "plainText"
+  mode: NORMAL
+  myViewsTabBar: "standard"
+  numExecutors: 2
+  primaryView:
+    all:
+      name: "all"
+  projectNamingStrategy: "standard"
+  quietPeriod: 5
+  remotingSecurity:
+    enabled: true
+  scmCheckoutRetryCount: 0
+  securityRealm:
+    local:
+      allowsSignup: true
+      enableCaptcha: false
+      users:
+      - id: "admin"
+        password: "1234"
+      - id: "user1"
+        password: "1234"
+      - id: "user_hashed"
+        password: "1234"
+  slaveAgentPort: 50000
+  updateCenter:
+    sites:
+    - id: "default"
+      url: "https://updates.jenkins.io/update-center.json"
+  views:
+  - list:
+      columns:
+      - "status"
+      - "weather"
+      - "jobName"
+      - "lastSuccess"
+      - "lastFailure"
+      - "lastDuration"
+      - "buildButton"
+      - "favoriteColumn"
+      jobNames:
+      - "hh"
+      name: "SI Vie"
+  - list:
+      columns:
+      - "status"
+      - "weather"
+      - "jobName"
+      - "lastSuccess"
+      - "lastFailure"
+      - "lastDuration"
+      - "buildButton"
+      - "favoriteColumn"
+      jobNames:
+      - "uaa"
+      name: "Transverse"
+  - all:
+      name: "all"
+  viewsTabBar: "standard"
+security:
+  apiToken:
+    creationOfLegacyTokenEnabled: false
+    tokenGenerationOnCreationEnabled: false
+    usageStatisticsEnabled: true
+  sSHD:
+    port: -1
+  scriptApproval:
+    approvedSignatures:
+    - "method org.apache.maven.model.Model getVersion"
+unclassified:
+  buildStepOperation:
+    enabled: false
+  extendedEmailPublisher:
+    adminRequiredForTemplateTesting: false
+    allowUnregisteredEnabled: false
+    charset: "UTF-8"
+    debugMode: false
+    defaultBody: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:\r\n\r\nCheck\
+      \ console output at $BUILD_URL to view the results."
+    defaultContentType: "text/plain"
+    defaultSubject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!"
+    maxAttachmentSize: -1
+    maxAttachmentSizeMb: 0
+    precedenceBulk: false
+    useSsl: false
+    watchingEnabled: false
+  gitHubPluginConfig:
+    hookUrl: "http://localhost:8080/github-webhook/"
+  gitSCM:
+    createAccountBasedOnEmail: false
+    showEntireCommitSummaryInChanges: false
+    useExistingAccountWithSameEmail: false
+  location:
+    adminAddress: "m.lahlou@wafaassurance.co.ma"
+    url: "http://localhost:8080/"
+  mailer:
+    charset: "UTF-8"
+    useSsl: false
+  pollSCM:
+    pollingThreadCount: 10
+  slackNotifier:
+    botUser: false
+    sendAsText: false
+  sonarglobalconfiguration: 
+    buildWrapperEnabled: true
+    installations:                          
+      - name: "SonarQubeServer"                   
+        serverUrl: "http://sonarqube:9000"
+        webhookSecretId: ""
+        credentialsId: token-sonarqube
+        serverAuthenticationToken: "token"
+        mojoVersion: "mojoVersion"
+        additionalProperties: "blah=blah"
+        additionalAnalysisProperties: "additionalAnalysisProperties"
+        triggers:
+          skipScmCause: true
+          skipUpstreamCause: true
+          envVar: "envVar"
+  timestamperConfig:
+    allPipelines: false
+    elapsedTimeFormat: "'<b>'HH:mm:ss.S'</b> '"
+    systemTimeFormat: "'<b>'HH:mm:ss'</b> '"
+tool:
+  ansibleInstallation:
+    installations:
+    - home: "/usr/bin/"
+      name: "ansible2"
+  git:
+    installations:
+    - home: "git"
+      name: "Default"
+  jdk:
+    installations:
+    - name: "jdk8"
+      properties:
+      - installSource:
+          installers:
+          - adoptOpenJdkInstaller:
+              id: "jdk8u172-b11"
+  maven:
+    installations:
+    - name: "apache-maven-3.5.2"
+      properties:
+      - installSource:
+          installers:
+          - maven:
+              id: "3.6.2"
+  pipelineMaven:
+    triggerDownstreamUponResultAborted: false
+    triggerDownstreamUponResultFailure: false
+    triggerDownstreamUponResultNotBuilt: false
+    triggerDownstreamUponResultSuccess: true
+    triggerDownstreamUponResultUnstable: false
+  sonarRunnerInstallation:
+    installations:
+    - name: "SonarQubeServer"
+      home: ""
+      properties:
+      - installSource:
+          installers:
+          - sonarRunnerInstaller:
+              id: "4.2.0.1873"

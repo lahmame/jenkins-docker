@@ -58,8 +58,11 @@ jenkins:
       enableCaptcha: false
       users:
       - id: "admin"
+        password: "1234"
       - id: "user1"
+        password: "1234"
       - id: "user_hashed"
+        password: "1234"
   slaveAgentPort: 50000
   updateCenter:
     sites:
@@ -191,4 +194,3 @@ tool:
           installers:
           - sonarRunnerInstaller:
               id: "4.2.0.1873"
-
